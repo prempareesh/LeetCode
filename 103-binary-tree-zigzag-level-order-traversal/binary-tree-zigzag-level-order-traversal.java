@@ -15,45 +15,40 @@
  */
 class Solution {
     public List<List<Integer>> zigzagLevelOrder(TreeNode root) {
-        List<List<Integer>> list=new ArrayList<>();
+          List<List<Integer>> list=new ArrayList<>();
         if(root == null){
-          return list;
+            return list;
         }
-       Deque<TreeNode>queue=new LinkedList<>();
-     queue.offer(root);
-      boolean reverse=false;
-       while(!queue.isEmpty()){
-        int size =queue.size();
-         ArrayList<Integer>currlevel=new ArrayList<>();
-        for(int i=0; i<size;i++){
-       if(!reverse){
-            TreeNode currnroot=queue.pollFirst();
-            currlevel.add(currnroot.val);
-            if(currnroot.left!=null){
-                queue.offerLast(currnroot.left);
+        Deque<TreeNode> queue=new LinkedList<>();
+        queue.offer(root);
+        boolean reverse=false;
+        while(!queue.isEmpty()){
+            int size=queue.size();
+            List<Integer> internal=new ArrayList<>();
+            for(int i=0; i<size; i++){
+                   if(!reverse){
+                TreeNode curr=queue.pollFirst();
+                internal.add(curr.val);
+                if(curr.left != null){
+                    queue.offerLast(curr.left);
+                } 
+                if(curr.right != null){
+                    queue.offerLast(curr.right);
+                }
+                }  else {
+                 TreeNode curr=queue.pollLast();
+                internal.add(curr.val);
+                if(curr.right != null){
+                    queue.offerFirst(curr.right);
+                }
+                if(curr.left != null){
+                    queue.offerFirst(curr.left);
+                } 
             }
-             if(currnroot.right!=null){
-                queue.offerLast(currnroot.right);
-             }
-       } else {
-             TreeNode currnroot=queue.pollLast();
-           currlevel.add(currnroot.val);
-             if(currnroot.right!=null){
-                queue.offerFirst(currnroot.right);
-             }
-             if(currnroot.left!=null){
-                queue.offerFirst(currnroot.left);
             }
-        
-       
-        }
-        }
-        
-        reverse=!reverse;
-    list.add(currlevel);
-
-       }
-return list;
+            reverse=!reverse;
+         list.add(internal);
+            }
+     return list;
 }
-}
-    
+    }
