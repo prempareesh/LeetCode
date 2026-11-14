@@ -9,14 +9,14 @@ class Solution {
         hm.put('C',100);
         hm.put('D',500);
         hm.put('M',1000);
-        for(int i=0; i<s.length()-1; i++){
-            if( hm.get(s.charAt(i)) < hm.get(s.charAt(i+1))){
+        for(int i=0; i<s.length(); i++){
+            if(i+1<s.length() && hm.get(s.charAt(i)) < hm.get(s.charAt(i+1))){
                 res-=hm.get(s.charAt(i));
-            } else if( hm.get(s.charAt(i)) >= hm.get(s.charAt(i+1))){
+            } else {
                 res+=hm.get(s.charAt(i));
             }
         }
-        res+=hm.get(s.charAt(s.length()-1));
+        //res+=hm.get(s.charAt(s.length()-1));
         return res;
     }
 }
