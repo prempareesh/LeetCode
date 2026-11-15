@@ -1,29 +1,21 @@
-import java.util.HashMap;
-import java.util.ArrayList;
-
 class Solution {
     public int[] intersect(int[] nums1, int[] nums2) {
-        // Step 1: Count frequencies of elements in nums1
-        HashMap<Integer, Integer> map = new HashMap<>();
-        for (int num : nums1) {
-            map.put(num, map.getOrDefault(num, 0) + 1);
+        ArrayList<Integer>list=new ArrayList<>();
+        HashMap<Integer,Integer>hm=new HashMap<>();
+        for(int i=0; i<nums1.length; i++){
+            hm.put(nums1[i],hm.getOrDefault(nums1[i],0)+1);
         }
-        
-        // Step 2: Find common elements with respect to counts
-        ArrayList<Integer> resultList = new ArrayList<>();
-        for (int num : nums2) {
-            if (map.containsKey(num) && map.get(num) > 0) {
-                resultList.add(num);
-                map.put(num, map.get(num) - 1); // Decrement count after matching
+        for(int j=0; j<nums2.length; j++){
+            if(hm.containsKey(nums2[j]) && hm.get(nums2[j])>0){
+                list.add(nums2[j]);
+            
+             hm.put(nums2[j],hm.get(nums2[j])-1);
             }
         }
-        
-        // Step 3: Convert the list to a primitive array
-        int[] ans = new int[resultList.size()];
-        for (int i = 0; i < resultList.size(); i++) {
-            ans[i] = resultList.get(i);
+        int arr[]=new int[list.size()];
+        for(int i=0; i<arr.length; i++){
+            arr[i]=list.get(i);
         }
-        
-        return ans;
+        return arr;
     }
 }
